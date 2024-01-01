@@ -1,48 +1,44 @@
-const http = require("http");
-const url = require("url");
-const querystring = require("querystring");
+const { connectDB } = require("./src/db");
+const User = require("./src/model/user");
+const myExpress = require("./src/module/myExpress");
+const app = myExpress();
 
-// Dummy data for demonstration purposes
-let data = [
-  { id: 1, name: "Item 1" },
-  { id: 2, name: "Item 2" },
-];
-
-const server = http.createServer((req, res) => {
-  // Parse URL
-  const parsedUrl = url.parse(req.url);
-  const path = parsedUrl.pathname;
-  const query = querystring.parse(parsedUrl.query);
-
-  // Set response headers
-  res.setHeader("Content-Type", "application/json");
-
-  // Handle routes
-  if (path === "/api/items" && req.method === "GET") {
-    // Get all items
-    res.statusCode = 200;
-    res.end(JSON.stringify(data));
-  } else if (path === "/api/items" && req.method === "POST") {
-    // Add a new item
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk;
-    });
-    req.on("end", () => {
-      const newItem = JSON.parse(body);
-      data.push(newItem);
-      res.statusCode = 201;
-      res.end(JSON.stringify(newItem));
-    });
-  } else {
-    // Handle other routes
-    res.statusCode = 404;
-    res.end(JSON.stringify({ error: "Not Found" }));
+app.get("/", async (req, res) => {
+  try {
+    const data = await User.find();
+    res.send({ message: "Hello, World!", data });
+  } catch (error) {
+    console.error("Error:", error);
   }
+});
+
+app.post("/", async (req, res) => {
+  const data = await User.insertOne(req.body);
+  console.log(req.body);
+  res.send({ message: "Data received successfully" });
+});
+
+app.put("/", async (req, res) => {
+  const itemId = req.params.id;
+  const updatedData = req.body;
+  console.log({ itemId, updatedData });
+  // Perform update logic using itemId and updatedData
+  const data = await User.updateOne({ _id: itemId }, updatedData);
+  res.send({
+    message: `Data with ID ${itemId} updated successfully`,
+    data,
+  });
+});
+
+app.delete("/api/data/:id", (req, res) => {
+  const itemId = req.params.id;
+  // Perform delete logic using itemId
+  res.send({ message: `Data with ID ${itemId} deleted successfully` });
 });
 
 const PORT = 2003;
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
+  connectDB();
   console.log(`Server is listening on port ${PORT}`);
 });
