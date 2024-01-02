@@ -6,7 +6,7 @@ const MONGOOSE = (collectionName) => {
     find: () => myMongoose.find(collectionName),
     updateOne: (filter, document) =>
       myMongoose.updateOne(collectionName, filter, document),
-    deleteOne: (document) => myMongoose.deleteOne(collectionName, document),
+    deleteOne: (filter) => myMongoose.deleteOne(collectionName, filter),
   };
 };
 module.exports = MONGOOSE;

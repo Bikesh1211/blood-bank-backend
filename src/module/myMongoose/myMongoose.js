@@ -1,7 +1,5 @@
 const { MongoClient, ObjectId } = require("mongodb");
-
 let db;
-
 async function connect(url, dbName) {
   try {
     const client = new MongoClient(url);
@@ -36,20 +34,20 @@ async function find(collectionName, filter = {}) {
   return db.collection(collectionName).find(filter).toArray();
 }
 
-async function updateOne(collectionName, filter, update) {
-  return db.collection(collectionName).updateOne(filter, update);
+async function updateOne(collectionName, filter, document) {
+  const updateData = { $set: document };
+  filter._id = getObjectID(filter._id);
+  return db.collection(collectionName).updateOne(filter, updateData);
 }
 
 async function deleteOne(collectionName, filter) {
+  filter._id = getObjectID(filter._id);
   return db.collection(collectionName).deleteOne(filter);
 }
 
 function getObjectID(id) {
   return new ObjectId(id);
 }
-// !------------
-
-// !------------
 module.exports = {
   connect,
   disconnect,

@@ -9,12 +9,10 @@ function myExpress() {
     PUT: {},
     DELETE: {},
   };
-
   const server = http.createServer((req, res) => {
     const method = req.method;
     const parsedUrl = url.parse(req.url, true);
     const path = parsedUrl.pathname;
-
     const routeHandler = routes[method][path] || notFound;
 
     // Parse request body for POST and PUT requests
@@ -25,8 +23,8 @@ function myExpress() {
     });
 
     req.on("end", () => {
-      // req.body = qs.parse(body);
-      req.body = JSON.parse(body);
+      req.body = qs.parse(body);
+
       // Extend res object to have a `send` method
       res.send = (data) => {
         res.writeHead(200, { "Content-Type": "application/json" });
