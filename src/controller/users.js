@@ -1,5 +1,6 @@
-const User = require("../model/user");
+const { User } = require("../model/user");
 const { convertToJSON } = require("../utils/jsonUtils");
+const jwt = require("jsonwebtoken");
 
 const getUsers = async (req, res) => {
   try {
@@ -10,8 +11,42 @@ const getUsers = async (req, res) => {
 };
 const addUser = async (req, res) => {
   const parseData = convertToJSON(req.body);
-  await User.insertOne(parseData);
+  const { email, password, fullName } = parseData;
+  const user = await User.findOne({ email });
+  if (user) {
+    return res.send({ message: "User Already Exists" });
+  }
+  await User.insertOne({ email, password, fullName });
   res.send({ message: "Data received successfully", data: parseData });
+};
+
+const loginUser = async (req, res) => {
+  const parseData = convertToJSON(req.body);
+  const { email, password } = parseData;
+
+  const createToken = (user) => {
+    return jwt.sign(user, "helloWorld", {
+      expiresIn: "7d",
+    });
+  };
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.send({ message: "User doesnt Exists" });
+    }
+    const token = createToken({ user: user.email, fullName: user.fullName });
+    if (user.password === password) {
+      return res.send({
+        ...user,
+        token,
+        success: true,
+      });
+    } else {
+      res.send({ message: "invalid credentials", success: false });
+    }
+  } catch (error) {
+    res.send({ error });
+  }
 };
 
 const updateUser = async (req, res) => {
@@ -31,4 +66,4 @@ const deleteUser = async (req, res) => {
   // Perform delete logic using itemId
   res.send({ message: `Data with ID ${updatedData.id} deleted successfully` });
 };
-module.exports = { getUsers, addUser, updateUser, deleteUser };
+module.exports = { getUsers, addUser, updateUser, deleteUser, loginUser };
