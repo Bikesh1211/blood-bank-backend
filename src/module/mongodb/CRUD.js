@@ -1,4 +1,4 @@
-const myMongoose = require("../myMongoose/myMongoose");
+const myMongoose = require("./mongodb");
 const MONGOOSE = (collectionName) => {
   return {
     insertOne: (document) => myMongoose.insertOne(collectionName, document),

@@ -2,7 +2,7 @@ const http = require("http");
 const url = require("url");
 const qs = require("querystring");
 
-function myExpress() {
+function myRoutes() {
   const routes = {
     GET: {},
     POST: {},
@@ -68,4 +68,4 @@ function myExpress() {
   };
 }
 
-module.exports = myExpress;
+module.exports = myRoutes;

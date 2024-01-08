@@ -1,7 +1,6 @@
 const { Donner } = require("../model/user");
-const { getObjectID } = require("../module/myMongoose/myMongoose");
+const { getObjectID } = require("../module/mongodb/mongodb");
 const { convertToJSON } = require("../utils/jsonUtils");
-const jwt = require("jsonwebtoken");
 
 const getDoner = async (req, res) => {
   try {
@@ -43,4 +42,4 @@ const deleteDoner = async (req, res) => {
   }
   res.send({ doner, message: "Delete data successfully" });
 };
-module.exports = { addDoner, deleteDoner, getDoner,updateDoner };
+module.exports = { addDoner, deleteDoner, getDoner, updateDoner };

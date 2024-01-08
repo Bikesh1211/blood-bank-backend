@@ -1,4 +1,4 @@
-const myMongoose = require("../module/myMongoose/myMongoose");
+const myMongoose = require("../module/mongodb/mongodb");
 
 const connectDB = () => {
   const url =
