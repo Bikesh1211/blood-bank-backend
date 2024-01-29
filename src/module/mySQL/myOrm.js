@@ -4,10 +4,13 @@ const {
   findAll,
   deleteRecordById,
   updateRecordById,
-} = require("../mongodb/CRUD");
+} = require("./CRUD");
 const myOrm = (tableName) => {
   return {
-    insertOne: (record) => insertRecord(tableName, record),
+    create: (record) =>
+      insertRecord(tableName, record)
+        .then((record) => record)
+        .catch((err) => err),
     findById: (id) =>
       findById(tableName, id)
         .then((record) => record)

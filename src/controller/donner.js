@@ -1,5 +1,4 @@
 const { Donner } = require("../model/user");
-const { getObjectID } = require("../module/mongodb/mongodb");
 const { convertToJSON } = require("../utils/jsonUtils");
 
 const getDoner = async (req, res) => {

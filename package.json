@@ -1,5 +1,5 @@
 {
-  "name": "blood-bank-backend",
+  "name": "tutor-finder-backend",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.3.0",
     "mysql2": "^3.9.0"
   }
 }
