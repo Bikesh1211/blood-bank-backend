@@ -1,5 +1,4 @@
 const { User } = require("../model/user");
-const { findAll } = require("../module/mySQL/CRUD");
 const { convertToJSON } = require("../utils/jsonUtils");
 const jwt = require("jsonwebtoken");
 
@@ -14,6 +13,11 @@ const getUsers = async (req, res) => {
 };
 const addUser = async (req, res) => {
   const parseData = convertToJSON(req.body);
+  // const parseData = {
+  //   username: "Bikesh is Good",
+  //   email: "don@gmail.com",
+  //   password: "bdon",
+  // };
   try {
     const data = await User.create(parseData);
     res.send({ message: "success", data });

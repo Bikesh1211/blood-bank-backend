@@ -11,7 +11,6 @@ database.connect((err) => {
     console.error("Error connecting to database: " + err.stack);
     return;
   }
-
   console.log("Yahoo! Connected to database.");
 
   // Close the database
