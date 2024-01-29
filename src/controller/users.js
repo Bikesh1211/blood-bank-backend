@@ -1,23 +1,39 @@
 const { User } = require("../model/user");
+const { findAll } = require("../module/mongodb/CRUD");
 const { convertToJSON } = require("../utils/jsonUtils");
 const jwt = require("jsonwebtoken");
 
 const getUsers = async (req, res) => {
   try {
-    res.send({ message: "Hello, World!" });
+    // const data = await User.findById(44);
+    const data = await User.findAll();
+    res.send({ data });
   } catch (error) {
     console.error("Error:", error);
   }
 };
 const addUser = async (req, res) => {
   const parseData = convertToJSON(req.body);
-  const { email, password, fullName } = parseData;
-  const user = await User.findOne({ email });
-  if (user) {
-    return res.send({ message: "User Already Exists" });
+  // const { email, password, fullName } = parseData;
+  // const user = await User.findOne({ email });
+  // if (user) {
+  //   return res.send({ message: "User Already Exists" });
+  // }
+  // await User.insertOne({ email, password, fullName });
+  // res.send({ message: "Data received successfully", data: parseData });
+  // const record = {
+  //   username: "john_doe",
+  //   email: "john@example.com",
+  //   password: "password123",
+  // };
+
+  try {
+    // insertRecord("users", parseData);
+    await User.insertOne(parseData);
+    res.send({ message: "success" });
+  } catch (error) {
+    res.send({ error });
   }
-  await User.insertOne({ email, password, fullName });
-  res.send({ message: "Data received successfully", data: parseData });
 };
 
 const loginUser = async (req, res) => {
@@ -50,20 +66,17 @@ const loginUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  // const itemId = req.params.id;
-  const updatedData = convertToJSON(req.body);
-  const { id, ...rest } = updatedData;
-  // Perform update logic using itemId and updatedData
-  const data = await User.updateOne({ _id: id }, rest);
-  res.send({
-    messag: `Data with ID updated successfully`,
-    data,
-  });
+  const record = {
+    username: "Bikesh is Good",
+    email: "john@example.com",
+  };
+  try {
+    const data = await User.updateById(34, record);
+    res.send({ message: "success", data });
+  } catch (error) {}
 };
 const deleteUser = async (req, res) => {
-  const updatedData = convertToJSON(req.body);
-  await User.deleteOne({ _id: updatedData.id });
-  // Perform delete logic using itemId
-  res.send({ message: `Data with ID ${updatedData.id} deleted successfully` });
+  const data = await User.deleteById(33);
+  res.send({ data, message: "success" });
 };
 module.exports = { getUsers, addUser, updateUser, deleteUser, loginUser };

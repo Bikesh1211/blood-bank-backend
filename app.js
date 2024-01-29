@@ -9,6 +9,6 @@ userRoute(app);
 donnerRoute(app);
 
 app.listen(PORT, () => {
-  connectDB();
+  // connectDB();
   console.log(`Server is listening on port ${PORT}`);
 });
