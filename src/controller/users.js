@@ -1,72 +1,53 @@
-const { User } = require("../model/user");
+const userService = require("../services/user.service");
 const { convertToJSON } = require("../utils/jsonUtils");
-const jwt = require("jsonwebtoken");
-
 const getUsers = async (req, res) => {
   try {
-    // const data = await User.findById(44);
-    const data = await User.findAll();
+    const body = {
+      email: "bikesh@gmail.com",
+    };
+    const data = await userService.getUsers(body);
     res.send({ data });
   } catch (error) {
     console.error("Error:", error);
   }
 };
 const addUser = async (req, res) => {
-  const parseData = convertToJSON(req.body);
-  // const parseData = {
-  //   username: "Bikesh is Good",
-  //   email: "don@gmail.com",
-  //   password: "bdon",
-  // };
+  const body = convertToJSON(req.body);
   try {
-    const data = await User.create(parseData);
-    res.send({ message: "success", data });
+    const user = await userService.addUser(body);
+    res.send({ message: "success", user });
   } catch (error) {
-    res.send({ error });
+    res.send({ error: "Error adding user", error });
   }
 };
 
 const loginUser = async (req, res) => {
-  const parseData = convertToJSON(req.body);
-  const { email, password } = parseData;
-
-  const createToken = (user) => {
-    return jwt.sign(user, "helloWorld", {
-      expiresIn: "7d",
-    });
-  };
+  const body = convertToJSON(req.body);
   try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.send({ message: "User doesnt Exists" });
-    }
-    const token = createToken({ user: user.email, fullName: user.fullName });
-    if (user.password === password) {
-      return res.send({
-        ...user,
-        token,
-        success: true,
-      });
-    } else {
-      res.send({ message: "invalid credentials", success: false });
-    }
+    const user = await userService.loginUser(body);
+    res.send({ message: "success", user });
   } catch (error) {
-    res.send({ error });
+    res.send({ error: "Error adding user" });
   }
 };
 
 const updateUser = async (req, res) => {
-  const parseData = convertToJSON(req.body);
-  const { id, ...rest } = parseData;
+  const { id, ...rest } = convertToJSON(req.body);
+  console.log({ rest, id });
   try {
-    const data = await User.updateById(id, rest);
+    const data = await userService.updateUser(id, rest);
     res.send({ message: "success", data });
-  } catch (error) {}
+  } catch (error) {
+    res.send({ message: "Error updating user", error });
+  }
 };
 const deleteUser = async (req, res) => {
-  const parseData = convertToJSON(req.body);
-  const { id } = parseData;
-  const data = await User.deleteById(id);
-  res.send({ data, message: "success" });
+  const { id } = convertToJSON(req.body);
+  try {
+    const data = await userService.deleteUser(id);
+    res.send({ message: "success", data });
+  } catch (error) {
+    res.send({ message: "error", error });
+  }
 };
 module.exports = { getUsers, addUser, updateUser, deleteUser, loginUser };

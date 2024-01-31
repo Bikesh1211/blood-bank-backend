@@ -9,6 +9,7 @@ function myRoutes() {
     PUT: {},
     DELETE: {},
   };
+
   const server = http.createServer((req, res) => {
     const method = req.method;
     const parsedUrl = url.parse(req.url, true);

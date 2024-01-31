@@ -8,7 +8,6 @@ const insertRecord = async (tableName, record) => {
         if (error) {
           reject(`Error inserting record: ${error.message}`);
         } else {
-          console.log({ results });
           resolve(results);
         }
       });
@@ -97,6 +96,14 @@ const updateRecordById = async (tableName, id, newData) => {
 };
 
 const createTable = (tableName, columns) => {
+  // const columns = [
+  //   { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
+  //   { name: "username", type: "VARCHAR(50)", notNull: true },
+  //   { name: "email", type: "VARCHAR(100)", notNull: true },
+  //   { name: "password", type: "VARCHAR(100)", notNull: true },
+  //   { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
+  // ];
+
   const columnDefinitions = columns
     .map((column) => {
       return `${column.name} ${column.type}${
@@ -127,13 +134,29 @@ const createTable = (tableName, columns) => {
   });
 };
 
-// const columns = [
-//   { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
-//   { name: "username", type: "VARCHAR(50)", notNull: true },
-//   { name: "email", type: "VARCHAR(100)", notNull: true },
-//   { name: "password", type: "VARCHAR(100)", notNull: true },
-//   { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
-// ];
+const findOneByDetails = (tableName, details) => {
+  return new Promise((resolve, reject) => {
+    const whereClause = Object.keys(details)
+      .map((key) => `${key} = ?`)
+      .join(" AND ");
+
+    const query = `SELECT * FROM ${tableName} WHERE ${whereClause}`;
+
+    const values = Object.values(details);
+
+    database.query(query, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        if (results.length > 0) {
+          resolve(results[0]);
+        } else {
+          resolve(null);
+        }
+      }
+    });
+  });
+};
 
 module.exports = {
   insertRecord,
@@ -142,4 +165,5 @@ module.exports = {
   findById,
   updateRecordById,
   createTable,
+  findOneByDetails,
 };

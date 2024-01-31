@@ -4,29 +4,16 @@ const {
   findAll,
   deleteRecordById,
   updateRecordById,
-} = require("./CRUD");
+  findOneByDetails,
+} = require("./crud-operation");
 const myOrm = (tableName) => {
   return {
-    create: (record) =>
-      insertRecord(tableName, record)
-        .then((record) => record)
-        .catch((err) => err),
-    findById: (id) =>
-      findById(tableName, id)
-        .then((record) => record)
-        .catch((error) => error),
-    findAll: () =>
-      findAll(tableName)
-        .then((records) => records)
-        .catch((error) => error),
-    deleteById: (id) =>
-      deleteRecordById(tableName, id)
-        .then((record) => record)
-        .catch((error) => error),
-    updateById: (id, record) =>
-      updateRecordById(tableName, id, record)
-        .then((record) => record)
-        .then((record) => record),
+    create: (record) => insertRecord(tableName, record),
+    findAll: () => findAll(tableName),
+    findById: (id) => findById(tableName, id),
+    findOne: (details) => findOneByDetails(tableName, details),
+    deleteById: (id) => deleteRecordById(tableName, id),
+    updateById: (id, record) => updateRecordById(tableName, id, record),
   };
 };
 module.exports = myOrm;
