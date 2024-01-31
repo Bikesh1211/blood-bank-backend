@@ -35,7 +35,7 @@ const updateUser = async (req, res) => {
   const { id, ...rest } = convertToJSON(req.body);
   console.log({ rest, id });
   try {
-    const data = await userService.updateUser(id, rest);
+    const data = await userService.updateById(id, rest);
     res.send({ message: "success", data });
   } catch (error) {
     res.send({ message: "Error updating user", error });

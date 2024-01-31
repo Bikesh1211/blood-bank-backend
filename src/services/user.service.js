@@ -1,6 +1,6 @@
 const { User } = require("../model/user");
 const jwt = require("jsonwebtoken");
-const { updateRecordById } = require("../module/mySQL/crud-operation");
+const { updateRecordById } = require("../module/mySQL/crud.service");
 
 class UserService {
   constructor(UserModel) {
@@ -23,7 +23,7 @@ class UserService {
   async getUsers(body) {
     try {
       return await this.UserModel.findAll();
-      return await this.UserModel.findOne(body);
+      //   return await this.UserModel.findOne(body);
       return await this.UserModel.findById(49);
     } catch (error) {
       return error;
@@ -64,7 +64,7 @@ class UserService {
   }
   async deleteUser(id) {
     try {
-      const data = await this.UserModel.deleteById(id);
+      const data = await this.UserModel.deleteById(53);
       return data;
     } catch (error) {
       throw error;

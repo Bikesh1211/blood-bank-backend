@@ -1,19 +1,16 @@
-const {
-  insertRecord,
-  findById,
-  findAll,
-  deleteRecordById,
-  updateRecordById,
-  findOneByDetails,
-} = require("./crud-operation");
+const crudServices = require("./crud.service");
 const myOrm = (tableName) => {
   return {
-    create: (record) => insertRecord(tableName, record),
-    findAll: () => findAll(tableName),
-    findById: (id) => findById(tableName, id),
-    findOne: (details) => findOneByDetails(tableName, details),
-    deleteById: (id) => deleteRecordById(tableName, id),
-    updateById: (id, record) => updateRecordById(tableName, id, record),
+    create: (record) => crudServices.insertRecord(tableName, record),
+    findAll: () => crudServices.findAll(tableName),
+    findById: (id) => crudServices.findById(tableName, id),
+    findOne: (details) => crudServices.findOneByDetails(tableName, details),
+    deleteById: (id) => crudServices.deleteRecordById(tableName, id),
+    updateById: (id, record) =>
+      crudServices
+        .updateRecordById(tableName, id, record)
+        .then((record) => record)
+        .catch((error) => error),
   };
 };
 module.exports = myOrm;
