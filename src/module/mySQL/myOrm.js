@@ -11,6 +11,8 @@ const myOrm = (tableName) => {
         .updateRecordById(tableName, id, record)
         .then((record) => record)
         .catch((error) => error),
+    dropTable: () => crudServices.dropTable(tableName),
+    createTable: (columns) => crudServices.createTable(tableName, columns),
   };
 };
 module.exports = myOrm;

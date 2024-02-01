@@ -1,6 +1,7 @@
 const http = require("http");
 const url = require("url");
 const qs = require("querystring");
+const auth = require("../middleware/auth.middleware");
 
 function myRoutes() {
   const routes = {
@@ -11,28 +12,37 @@ function myRoutes() {
   };
 
   const server = http.createServer((req, res) => {
-    const method = req.method;
-    const parsedUrl = url.parse(req.url, true);
-    const path = parsedUrl.pathname;
-    const routeHandler = routes[method][path] || notFound;
+    res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    // res.setHeader(
+    //   "Access-Control-Allow-Headers",
+    //   "Content-Type, Authorization"
+    // );
 
-    // Parse request body for POST and PUT requests
-    let body = "";
+    auth(req, res, () => {
+      const method = req.method;
+      const parsedUrl = url.parse(req.url, true);
+      const path = parsedUrl.pathname;
+      const routeHandler = routes[method][path] || notFound;
 
-    req.on("data", (chunk) => {
-      body += chunk;
-    });
+      // Parse request body for POST and PUT requests
+      let body = "";
 
-    req.on("end", () => {
-      req.body = qs.parse(body);
+      req.on("data", (chunk) => {
+        body += chunk;
+      });
 
-      // Extend res object to have a `send` method
-      res.send = (data) => {
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(data));
-      };
+      req.on("end", () => {
+        req.body = qs.parse(body);
 
-      routeHandler(req, res);
+        // Extend res object to have a `send` method
+        res.send = (data) => {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify(data));
+        };
+
+        routeHandler(req, res);
+      });
     });
   });
 

@@ -1,6 +1,5 @@
 const { User } = require("../model/user");
-const jwt = require("jsonwebtoken");
-const { updateRecordById } = require("../module/mySQL/crud.service");
+const { createToken, verifyToken } = require("../utils/jwt.utils");
 
 class UserService {
   constructor(UserModel) {
@@ -14,6 +13,18 @@ class UserService {
     // };
 
     try {
+      const columns = [
+        { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
+        { name: "username", type: "VARCHAR(50)", notNull: true },
+        { name: "email", type: "VARCHAR(100)", notNull: true },
+        { name: "password", type: "VARCHAR(100)", notNull: true },
+        { name: "role", type: "VARCHAR(50)", notNull: true },
+        { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
+      ];
+
+      // await this.UserModel.createTable(columns);
+      // await this.UserModel.dropTable();
+
       const user = await this.UserModel.create(body);
       return user;
     } catch (error) {
@@ -32,25 +43,23 @@ class UserService {
   async loginUser(body) {
     try {
       const { email, password } = body;
-      const createToken = (user) => {
-        return jwt.sign(user, "helloWorld", {
-          expiresIn: "7d",
-        });
-      };
       try {
         const user = await this.UserModel.findOne({ email });
         if (!user) {
           return { message: "User doesnt Exists" };
         }
         const token = createToken({
-          user: user.email,
-          fullName: user.fullName,
+          email: user.email,
+          username: user.username,
+          role: user.role,
         });
+        const de = verifyToken(token);
         if (user.password === password) {
           return {
             ...user,
             token,
             success: true,
+            de,
           };
         } else {
           return { message: "invalid credentials", success: false };
@@ -64,7 +73,7 @@ class UserService {
   }
   async deleteUser(id) {
     try {
-      const data = await this.UserModel.deleteById(53);
+      const data = await this.UserModel.deleteById(id);
       return data;
     } catch (error) {
       throw error;
@@ -72,8 +81,7 @@ class UserService {
   }
   async updateUser(id, body) {
     try {
-      return await this.UserModel.deleteById(id, body);
-      return await updateRecordById("users", id, body);
+      return await this.UserModel.updateById(id, body);
     } catch (error) {
       throw error;
     }

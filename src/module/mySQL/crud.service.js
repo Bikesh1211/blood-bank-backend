@@ -72,6 +72,7 @@ class crudOperation {
   };
   updateRecordById = async (tableName, id, newData) => {
     try {
+      console.log("updating record");
       const recordToDelete = await this.findById(tableName, id);
 
       const setValues = Object.keys(newData)
@@ -103,6 +104,7 @@ class crudOperation {
     //   { name: "username", type: "VARCHAR(50)", notNull: true },
     //   { name: "email", type: "VARCHAR(100)", notNull: true },
     //   { name: "password", type: "VARCHAR(100)", notNull: true },
+    //   { name: "role", type: "VARCHAR(50)", notNull: true },
     //   { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
     // ];
 
@@ -117,19 +119,19 @@ class crudOperation {
     this.database.query(`SHOW TABLES LIKE '${tableName}'`, (error, results) => {
       if (error) {
         console.error("Error checking table existence: " + error.message);
-        return;
+        return "Error checking table existence: " + error.message;
       }
 
       if (results.length > 0) {
         console.log(`Table '${tableName}' already exists.`);
-        return;
+        return `Table '${tableName}' already exists.`;
       } else {
         const query = `CREATE TABLE IF NOT EXISTS \`${tableName}\` (${columnDefinitions});`;
         this.database.query(query, (error, results, fields) => {
           if (error) {
-            console.error("Error creating table: " + error.message);
+            return "Error creating table: " + error.message;
           } else {
-            console.log("Table created successfully.");
+            return "Table created successfully.";
           }
         });
       }
@@ -159,16 +161,13 @@ class crudOperation {
       });
     });
   };
+  dropTable = (tableName) => {
+    try {
+      this.database.query(`DROP TABLE ${tableName}`, (error, result) => {
+        console.log({ error, result });
+      });
+    } catch (error) {}
+  };
 }
 const crudServices = new crudOperation(database);
 module.exports = crudServices;
-// module.exports = {
-//   insertRecord,
-//   deleteRecordById,
-//   findAll,
-//   findById,
-//   updateRecordById,
-//   createTable,
-//   findOneByDetails,
-//   crudServices,
-// };
