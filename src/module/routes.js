@@ -2,7 +2,6 @@ const http = require("http");
 const url = require("url");
 const qs = require("querystring");
 const auth = require("../middleware/auth.middleware");
-
 function myRoutes() {
   const routes = {
     GET: {},
@@ -14,11 +13,6 @@ function myRoutes() {
   const server = http.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    // res.setHeader(
-    //   "Access-Control-Allow-Headers",
-    //   "Content-Type, Authorization"
-    // );
-
     auth(req, res, () => {
       const method = req.method;
       const parsedUrl = url.parse(req.url, true);

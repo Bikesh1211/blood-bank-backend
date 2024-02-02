@@ -15,7 +15,6 @@ const getUsers = async (req, res) => {
 const addUser = async (req, res) => {
   const body = convertToJSON(req.body);
   try {
-    
     const user = await userService.addUser(body);
     res.send({ message: "success", user });
   } catch (error) {

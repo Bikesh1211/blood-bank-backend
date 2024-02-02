@@ -39,31 +39,10 @@
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
   </form>
-</div><button id="getDataButton">Get Data</button>
+</div>
 <script>
 
 
-// document.getElementById('getDataButton').addEventListener('click', function() {
-//   const baseUrl = 'http://localhost:2003'
-//     fetch(`${baseUrl}/login`)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok');
-//             }
-//             return response.json(); // Parse the JSON response
-//         })
-//         .then(data => {
-//             // Handle the data from the API
-//             console.log(data);
-//             // You can manipulate the data or update the DOM here
-//         })
-//         .catch(error => {
-//             console.error('There was a problem with the fetch operation:', error);
-//         });
-// });
-
-
-  // Listen for form submission
   document.getElementById('loginForm').addEventListener('submit', function(event) {
       // Prevent default form submission
       event.preventDefault();
