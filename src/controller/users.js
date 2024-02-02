@@ -1,15 +1,17 @@
 const userService = require("../services/user.service");
 const { convertToJSON } = require("../utils/jsonUtils");
 const getUsers = async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const body = {
+    email: "bikesh@gmail.com1",
+  };
   try {
-    const body = {
-      email: "bikesh@gmail.com",
-    };
-
     const data = await userService.getUsers(body);
-    res.send({ data });
+    res.writeHead(200);
+    res.end(JSON.stringify(data));
   } catch (error) {
-    console.error("Error:", error);
+    res.writeHead(500);
+    res.end("Internal Server Error");
   }
 };
 const addUser = async (req, res) => {
