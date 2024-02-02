@@ -48,18 +48,10 @@
 
 
         document.getElementById('loginForm').addEventListener('submit', function (event) {
-          // Prevent default form submission
           event.preventDefault();
-
-          // Get input field values
           const email = document.getElementById('email').value;
           const password = document.getElementById('password').value;
           const rememberMe = document.getElementById('exampleCheck1').checked;
-
-          // Log input field values to the console
-          console.log('Email:', email);
-          console.log('Password:', password);
-          console.log('Remember Me:', rememberMe);
 
 
 
@@ -85,11 +77,8 @@
               return response.json(); // Parse the JSON response
             })
             .then(data => {
-              // Handle the response from the server
               localStorage.setItem('userData',JSON.stringify(data))
-              console.log("reach herea")
-              window.location.href = "profile.html";
-              console.log({data});
+              // window.location.href = "profile.html";
             })
             .catch(error => {
               // Handle errors

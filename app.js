@@ -42,11 +42,8 @@ const onRequest = async (req, res) => {
         const postData = JSON.parse(body);
 
         res.writeHead(200, { "Content-Type": "application/json" });
-
-        const user = await userService.loginUser(postData);
-        res.end(
-          JSON.stringify({ user, message: "Data received successfully" })
-        );
+        const data = await userService.loginUser(postData);
+        res.end(JSON.stringify({ data }));
       } catch (error) {
         console.error("Error parsing JSON:", error);
         res.writeHead(400, { "Content-Type": "application/json" });

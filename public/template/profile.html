@@ -19,14 +19,9 @@
     <script>
       const userData = localStorage.getItem('userData');
       const parsedData = JSON.parse(userData)
-      console.log('🚀 ~ parsedData:', parsedData)
       const {username,email} = parsedData.user
-      console.log('🚀 ~ username:', username)
       
-// Get the container where you want to render the card
 const cardContainer = document.getElementById('cardContainer');
-
-// Create HTML markup for the card
 const cardHTML = `
   <div class="card" style="width: 18rem;">
     <img src="https://cdn.vectorstock.com/i/preview-1x/17/61/male-avatar-profile-picture-vector-10211761.jpg" class="card-img-top" alt="...">
@@ -37,8 +32,6 @@ const cardHTML = `
     </div>
   </div>
 `;
-
-// Set the innerHTML of the container to the card HTML
 cardContainer.innerHTML = cardHTML;
         </script>
 </body>

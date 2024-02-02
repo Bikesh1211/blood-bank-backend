@@ -46,7 +46,7 @@ class UserService {
       try {
         const user = await this.UserModel.findOne({ email });
         if (!user) {
-          return { message: "User doesnt Exists" };
+          throw { message: "User doesnt Exists" };
         }
         const token = createToken({
           email: user.email,
