@@ -1,16 +1,13 @@
 const userService = require("../services/user.service");
 const { convertToJSON } = require("../utils/jsonUtils");
 const getUsers = async (req, res) => {
-  // res.setHeader("Content-Type", "application/json");
   const body = {
     email: "bikesh@gmail.com1",
   };
   try {
     const data = await userService.getUsers(body);
-    res.writeHead(200);
     res.end(JSON.stringify(data));
   } catch (error) {
-    // res.writeHead(500);
     res.end("Internal Server Error");
   }
 };
@@ -27,21 +24,22 @@ const addUser = async (req, res) => {
 const registerUser = async (req, res) => {
   try {
     const body = convertToJSON(req.body);
-    const { role } = body;
-    if (role === "student") {
-      console.log("student body", body);
-    } else if (role === "teacher") {
-    }
-  } catch (error) {}
+    console.log("🚀 ~ registerUser ~ postData:", body);
+    const data = await userService.addUser(body);
+    res.end(JSON.stringify({ data }));
+  } catch (error) {
+    res.end(JSON.stringify({ error: "Invalid JSON data" }));
+  }
 };
 
 const loginUser = async (req, res) => {
-  const body = convertToJSON(req.body);
   try {
-    const user = await userService.loginUser(body);
-    res.send({ message: "success", user });
+    const postData = convertToJSON(req.body);
+    const data = await userService.loginUser(postData);
+    res.end(JSON.stringify({ data }));
   } catch (error) {
-    res.send({ error: "Error adding user" });
+    console.error("Error parsing JSON:", error);
+    res.end(JSON.stringify({ error: "Invalid JSON data" }));
   }
 };
 
