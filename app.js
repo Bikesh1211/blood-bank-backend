@@ -30,9 +30,7 @@ const onRequest = async (req, res) => {
   } else if (method === "GET" && url === "/users") {
     await getUsers(req, res);
   } else if (req.method === "POST" && req.url === "/login") {
-    console.log("bikesh is inside post login");
     let body = "";
-
     req.on("data", (chunk) => {
       body += chunk.toString();
     });
@@ -46,6 +44,23 @@ const onRequest = async (req, res) => {
         res.end(JSON.stringify({ data }));
       } catch (error) {
         console.error("Error parsing JSON:", error);
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid JSON data" }));
+      }
+    });
+  } else if (req.method === "POST" && req.url === "/register") {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", async () => {
+      try {
+        const postData = JSON.parse(body);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        const data = await userService.addUser(postData);
+        res.end(JSON.stringify({ data }));
+      } catch (error) {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: "Invalid JSON data" }));
       }

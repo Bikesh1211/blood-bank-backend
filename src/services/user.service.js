@@ -6,26 +6,30 @@ class UserService {
     this.UserModel = UserModel;
   }
   async addUser(body) {
-    // const body = {
-    //   username: "Bikesh is Good",
-    //   email: "don@gmail.com",
-    //   password: "bdon",
-    // };
-
+    const body1 = {
+      email: "don@gmail.com",
+      password: "bdon",
+      fullName: "Bruce Wayne",
+      Address: "Kalanki",
+      role: "teacher",
+      phone: "123123123",
+    };
     try {
       const columns = [
         { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
-        { name: "username", type: "VARCHAR(50)", notNull: true },
+        { name: "fullName", type: "VARCHAR(50)", notNull: true },
+        { name: "phone", type: "VARCHAR(50)", notNull: true },
+        { name: "Address", type: "VARCHAR(50)", notNull: true },
         { name: "email", type: "VARCHAR(100)", notNull: true },
         { name: "password", type: "VARCHAR(100)", notNull: true },
         { name: "role", type: "VARCHAR(50)", notNull: true },
         { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
       ];
 
-      // await this.UserModel.createTable(columns);
+      await this.UserModel.createTable(columns);
       // await this.UserModel.dropTable();
 
-      const user = await this.UserModel.create(body);
+      const user = await this.UserModel.create(body1);
       return user;
     } catch (error) {
       throw error;
