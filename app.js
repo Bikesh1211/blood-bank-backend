@@ -69,38 +69,6 @@ const onRequest = async (req, res) => {
       default:
         break;
     }
-    // if (method === "OPTIONS") {
-    //   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    //   res.setHeader(
-    //     "Access-Control-Allow-Headers",
-    //     "Content-Type, Content-Range, Content-Disposition, Content-Description"
-    //   );
-    //   res.end();
-    // } else if (method === "GET" && req.url === "/") {
-    //   res.setHeader("Content-Type", "text/html");
-    //   const filePath = path.join(__dirname, "./public/template/index.html");
-    //   try {
-    //     const htmlContent = fs.readFileSync(filePath, "utf8");
-    //     res.writeHead(200);
-    //     res.end(htmlContent);
-    //   } catch (error) {
-    //     console.error("Error reading HTML file:", error);
-    //     res.writeHead(500);
-    //     res.end("Internal Server Error");
-    //   }
-    // } else if (method === "GET" && req.url === "/users") {
-    //   res.writeHead(200, { "Content-Type": "application/json" });
-    //   await getUsers(req, res);
-    // } else if (method === "POST" && req.url === "/login") {
-    //   res.writeHead(200, { "Content-Type": "application/json" });
-    //   await loginUser(req, res);
-    // } else if (method === "POST" && req.url === "/register") {
-    //   res.writeHead(200, { "Content-Type": "application/json" });
-    //   await registerUser(req, res);
-    // } else {
-    //   res.writeHead(404);
-    //   res.end(JSON.stringify({ error: "Not Found" }));
-    // }
   });
 };
 
