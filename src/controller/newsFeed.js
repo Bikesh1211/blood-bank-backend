@@ -1,30 +1,31 @@
-const userService = require("../services/user.service");
+const feedServices = require("../services/feed.service");
 const { convertToJSON } = require("../utils/jsonUtils");
-const getUsers = async (req, res) => {
+const getFeeds = async (req, res) => {
   const body = {
     email: "bikesh@gmail.com1",
   };
   try {
-    const data = await userService.getUsers(body);
+    const data = await feedServices.getFeeds(body);
     res.end(JSON.stringify(data));
   } catch (error) {
     res.end("Internal Server Error");
   }
 };
-const addUser = async (req, res) => {
+const addFeeds = async (req, res) => {
   const body = convertToJSON(req.body);
+  console.log("🚀 ~ addFeed ~ body:", body);
   try {
-    const user = await userService.addUser(body);
-    res.send({ message: "success", user });
+    const user = await feedServices.addFeed(body);
+    res.end({ message: "success", user });
   } catch (error) {
-    res.send({ error: "Error adding user", error });
+    res.end({ error: "Error adding user", error });
   }
 };
 
-const registerUser = async (req, res) => {
+const addNewsFeed = async (req, res) => {
   try {
     const body = convertToJSON(req.body);
-    const data = await userService.addUser(body);
+    const data = await feedServices.addFeed(body);
     res.end(JSON.stringify({ data }));
   } catch (error) {
     res.end(JSON.stringify({ error: "Invalid JSON data" }));
@@ -34,7 +35,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const postData = convertToJSON(req.body);
-    const data = await userService.loginUser(postData);
+    const data = await feedServices.loginUser(postData);
     res.end(JSON.stringify({ data }));
   } catch (error) {
     console.error("Error parsing JSON:", error);
@@ -45,7 +46,7 @@ const loginUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { id, ...rest } = convertToJSON(req.body);
   try {
-    const data = await userService.updateUser(id, rest);
+    const data = await feedServices.updateUser(id, rest);
     res.send({ message: "success", data });
   } catch (error) {
     res.send({ message: "Error updating user", error });
@@ -54,17 +55,17 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = convertToJSON(req.body);
   try {
-    const data = await userService.deleteUser(id);
+    const data = await feedServices.deleteUser(id);
     res.send({ message: "success", data });
   } catch (error) {
     res.send({ message: "error", error });
   }
 };
 module.exports = {
-  getUsers,
-  addUser,
+  getFeeds,
+  addFeeds,
   updateUser,
   deleteUser,
   loginUser,
-  registerUser,
+  addNewsFeed,
 };

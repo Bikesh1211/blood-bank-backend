@@ -115,7 +115,7 @@ class crudOperation {
         }${column.notNull ? " NOT NULL" : ""}`;
       })
       .join(", ");
-
+    console.log("step 1");
     this.database.query(`SHOW TABLES LIKE '${tableName}'`, (error, results) => {
       if (error) {
         console.error("Error checking table existence: " + error.message);
@@ -123,7 +123,9 @@ class crudOperation {
       }
 
       if (results.length > 0) {
+        console.log("step 3");
         console.log(`Table '${tableName}' already exists.`);
+
         return `Table '${tableName}' already exists.`;
       } else {
         const query = `CREATE TABLE IF NOT EXISTS \`${tableName}\` (${columnDefinitions});`;
@@ -134,6 +136,7 @@ class crudOperation {
             return "Table created successfully.";
           }
         });
+        console.log("step 2");
       }
     });
   };

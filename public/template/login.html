@@ -18,23 +18,27 @@
   <div class="container">
     <div class="row m-5">
    
-      <div class=" col-xs-12 col-lg-6 order-lg-2 order-sm-1 ">
+      <div class=" col-xs-12 col-lg-6 col-xl-5  order-lg-2 order-sm-1 ">
         <form id="loginForm">
           <div class="mb-3">
             <h1>Login</h1>
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control form-control-sm" id="password">
           </div>
-          <button type="submit" class="btn btn-primary">Login</button>
+
+          <div class="d-flex justify-content-between align-items-center">
+              <p class="mb-0">Don't Have an Account? <a href="register.html"> Register Now</a></p>
+              <button class="btn btn-primary ">Login</button>
+        </div>
         </form>
       </div>
 
-      <div class=" col-xs-12 col-lg-6 order-lg-1 order-sm-2 mt-5 mt-lg-0">
+      <div class=" col-xs-12 col-lg-6 col-xl-7 order-lg-1 order-sm-2 mt-5 mt-lg-0">
         <div class="image-container">
           <img src="https://epe.brightspotcdn.com/6f/a8/c2f05ace44a9a09cc53392bbf41f/10-tutor-101221-1259958507.jpg"
             alt="">
