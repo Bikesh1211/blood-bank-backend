@@ -19,7 +19,8 @@ class UserService {
         { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
         { name: "fullName", type: "VARCHAR(50)", notNull: true },
         { name: "phone", type: "VARCHAR(50)", notNull: true },
-        { name: "Address", type: "VARCHAR(50)", notNull: true },
+        { name: "address", type: "VARCHAR(50)", notNull: true },
+        { name: "gender", type: "VARCHAR(50)", notNull: true },
         { name: "email", type: "VARCHAR(100)", notNull: true },
         { name: "password", type: "VARCHAR(100)", notNull: true },
         { name: "role", type: "VARCHAR(50)", notNull: true },
@@ -29,7 +30,7 @@ class UserService {
       await this.UserModel.createTable(columns);
       // await this.UserModel.dropTable();
 
-      const user = await this.UserModel.create(body1);
+      const user = await this.UserModel.create(body);
       return user;
     } catch (error) {
       throw error;

@@ -19,7 +19,7 @@
     <div class="row m-5">
    
       <div class=" col-xs-12  col-lg-6 col-xl-5  order-lg-2 order-sm-1 ">
-        <form id="loginForm">
+        <form id="registerForm">
             <h1 class="text-center"> Register Account</h1>
             <div class="d-block d-md-flex  gap-5 justify-content-center my-3">
 
@@ -42,27 +42,27 @@
             <input type="fullName" class="form-control form-control-sm" id="fullName" aria-describedby="fullNameHelp">
           </div>
           <div class="mb-3">
-            <label for="fullName" class="form-label">Address</label>
-            <input type="fullName" class="form-control form-control-sm" id="fullName" aria-describedby="fullNameHelp">
+            <label for="address" class="form-label">Address</label>
+            <input type="address" class="form-control form-control-sm" id="address" aria-describedby="fullNameHelp">
           </div>
           <div class="mb-3">
-            <label for="fullName" class="form-label">Gender</label>
+            <label for="gender" class="form-label">Gender</label>
             <div class="d-block d-md-flex gap-5 ">
 
               <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1">
               <label class="form-check-label" for="flexRadioDefault1">
                 Male
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" checked>
               <label class="form-check-label" for="flexRadioDefault2">
                 Female
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" checked>
               <label class="form-check-label" for="flexRadioDefault2">
                 Others
               </label>
@@ -74,8 +74,8 @@
             <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">Phone </label>
-            <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
+            <label for="phone" class="form-label">Phone </label>
+            <input type="phone" class="form-control form-control-sm" id="phone" aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
@@ -84,7 +84,7 @@
 
           <div class="d-flex justify-content-between align-items-center">
             <p class="mb-0">Already Have an Account? <a href="register.html">Login</a></p>
-            <button class="btn btn-primary ">Register</button>
+            <button class="btn btn-primary type='submit' ">Register</button>
       </div>
         </form>
       </div>
@@ -98,18 +98,24 @@
       <script>
 
 
-        document.getElementById('loginForm').addEventListener('submit', function (event) {
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
           event.preventDefault();
           const email = document.getElementById('email').value;
           const password = document.getElementById('password').value;
-          const isTeacher = document.getElementById('role').checked;
-
+          const fullName = document.getElementById('fullName').value;
+          // const gender = document.getElementById('gender').value;
+          
+          
+          const address = document.getElementById('address').value;
+          // const role = document.getElementById('role').value;
+          const phone = document.getElementById('phone').value;
 
 
           // Data to be sent in the POST request
           const data = {
-            email, password
+            email,password,fullName,address,phone
           };
+          console.log('🚀 ~ data:', data)
 
           // Options for the fetch() function
           const options = {

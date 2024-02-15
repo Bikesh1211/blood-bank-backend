@@ -23,34 +23,57 @@ function renderUsers(users) {
     <div class="card-body">
         <h4 class="card-title">${user.fullName}</h4>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
-        <ul class='list-unstyled'>
-            <li class="card-text"><strong>Email:</strong> ${user.email}</li>
-            <li class="card-text"><strong>Address:</strong> ${user.Address}</li>
-            <li class="card-text"><strong>Contact:</strong> ${user.phone}</li>
-        </ul>
-        <div class="d-flex justify-content-end">
-        <button class="btn btn-primary mb-2">Hire Tutor</button>
+
+        <table class="table table-borderless table-sm">
+        <tbody>
+        <tr>
+        <th scope="row">Gender</th>
+        <td class='text-capitalize'>${user.gender}</td>
+        </tr>
+        <tr >
+        <th scope="row">Address</th>
+        <td>${user.Address}</td>
+      </tr>
+      <tr>
+      <th scope="row">Contact</th>
+      <td>${user.phone}</td>
+    </tr>
+          <tr>
+            <th scope="row">Email</th>
+            <td>${user.email}</td>
+          </tr>
+
+
+
+    
+        </tbody>
+    </table>
+        <div class="d-grid gap-2 col-12 mx-auto">
+        <button class="btn btn-success mb-2">Hire Tutor</button>
     </div>
     
     </div>
 </div>
 `;
     //     cardElement.innerHTML = `
-    //     <div class="card mb-5 shadow" style="max-width: 18rem;">
-    //     <img src="https://images.ctfassets.net/pdf29us7flmy/4hFcXfNyX4qKeKXEPjQhy6/e3f89662f430dd94ffb67ad06e518963/ENtwvqMg.png" class="card-img-top" alt="User Image">
+    //     <div class="border rounded-4 p-4 mb-4">
+    //     <img src="https://www.pluggedin.com/wp-content/uploads/2019/12/bad-teacher-1200x901.jpg" class="card-img-top" alt="User Image">
     //     <div class="card-body">
-    //         <h5 class="card-title">${user.fullName}</h5>
+    //         <h4 class="card-title">${user.fullName}</h4>
+    //         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
     //         <ul class='list-unstyled'>
-    //             <li class="card-text"><strong>Username:</strong> ${user.username}</li>
     //             <li class="card-text"><strong>Email:</strong> ${user.email}</li>
     //             <li class="card-text"><strong>Address:</strong> ${user.Address}</li>
-    //             <li class="card-text"><strong>Contact:</strong> ${user.contact}</li>
-    //             <li class="card-text"><strong>Description:</strong> ${user.Description}</li>
+    //             <li class="card-text"><strong>Contact:</strong> ${user.phone}</li>
     //         </ul>
-    //         <a href="#" class="btn btn-primary btn-sm">View Profile</a>
+    //         <div class="d-flex justify-content-end">
+    //         <button class="btn btn-primary mb-2">Hire Tutor</button>
+    //     </div>
+
     //     </div>
     // </div>
     // `;
+
     userListContainer.appendChild(cardElement);
   });
 }

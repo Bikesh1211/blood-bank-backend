@@ -14,17 +14,6 @@ class FeedServices {
       phone: "123123123",
     };
     try {
-      // const columns = [
-      //   { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
-      //   { name: "subject", type: "VARCHAR(50)", notNull: true },
-      //   { name: "class", type: "VARCHAR(50)", notNull: true },
-      //   { name: "Medium", type: "VARCHAR(50)", notNull: true },
-      //   { name: "salary", type: "VARCHAR(100)", notNull: true },
-      //   { name: "Location", type: "VARCHAR(100)", notNull: true },
-      //   { name: "Prefered University", type: "VARCHAR(50)", notNull: true },
-      //   { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
-      // ];
-
       const columns = [
         { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
         { name: "subject", type: "VARCHAR(50)", notNull: true },
@@ -35,7 +24,7 @@ class FeedServices {
         { name: "prefered_university", type: "VARCHAR(50)", notNull: true },
         { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
       ];
-      // await this.NewsFeedModel.createTable(columns);
+      await this.NewsFeedModel.createTable(columns);
       // await this.NewsFeedModel.dropTable();
 
       const user = await this.NewsFeedModel.create(body);
