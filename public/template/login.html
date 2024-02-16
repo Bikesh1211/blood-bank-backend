@@ -56,9 +56,7 @@
           const data = {
             email, password
           };
-          console.log('🚀 ~ data:', data)
-
-          // Options for the fetch() function
+                // Options for the fetch() function
           const options = {
             method: 'POST',
             headers: {
@@ -80,9 +78,7 @@
               if(data.success){
                 window.location.replace("users.html")
                 localStorage.setItem('userData',JSON.stringify(data))
-              }
-   
-         
+              }        
             })
             .catch(error => {
               // Handle errors

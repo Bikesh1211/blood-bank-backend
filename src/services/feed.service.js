@@ -5,14 +5,6 @@ class FeedServices {
     this.NewsFeedModel = NewsFeedModel;
   }
   async addFeed(body) {
-    const body1 = {
-      email: "don@gmail.com",
-      password: "bdon",
-      fullName: "Bruce Wayne",
-      Address: "Kalanki",
-      role: "teacher",
-      phone: "123123123",
-    };
     try {
       const columns = [
         { name: "id", type: "INT AUTO_INCREMENT", primaryKey: true },
