@@ -12,27 +12,61 @@ async function getUsers() {
 }
 
 function renderUsers(users) {
-  const userListContainer = document.getElementById("userList");
+  const userListContainer = document.getElementById("feed-list");
   userListContainer.innerHTML = ""; // Clear previous content
 
-  users.forEach((user) => {
+  users.forEach((data) => {
     const cardElement = document.createElement("div");
-    cardElement.classList.add("col-3"); // Bootstrap column size
+    cardElement.classList.add("col-xl-6");
     cardElement.innerHTML = `
-      <div class="card mb-5 shadow" style="max-width: 18rem;">
-      <img src="https://images.ctfassets.net/pdf29us7flmy/4hFcXfNyX4qKeKXEPjQhy6/e3f89662f430dd94ffb67ad06e518963/ENtwvqMg.png" class="card-img-top" alt="User Image">
-      <div class="card-body">
-          <h5 class="card-title">${user.fullName}</h5>
-          <ul class='list-unstyled'>
-              <li class="card-text"><strong>Username:</strong> ${user.username}</li>
-              <li class="card-text"><strong>Email:</strong> ${user.email}</li>
-              <li class="card-text"><strong>Address:</strong> ${user.Address}</li>
-              <li class="card-text"><strong>Contact:</strong> ${user.contact}</li>
-              <li class="card-text"><strong>Description:</strong> ${user.Description}</li>
-          </ul>
-          <a href="#" class="btn btn-primary btn-sm">View Profile</a>
-      </div>
-  </div>
+    <div class="col-sm-12 border rounded-4 p-5 mb-4">
+    <div class="row text-center">
+        <div class="col-3 ">
+                <img src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg" class="img-fluid rounded" alt="Avatar">
+                <h5 class="">Bikesh Chaudhary</h5>
+        </div>
+        <div class="col-6 text-start">
+            <p>Looking for a Teacher who can teach me at an Affordable Rate</p>
+            <p class="text-secondary">Post on: 23/12/2020<br>Deadline: 23/12/2020</p>
+        </div>
+        
+
+
+    </div>
+    <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Subject</th>
+            <td>${data.subject}</td>
+          </tr>
+          <tr>
+            <th scope="row">Class</th>
+            <td>${data.class}</td>
+
+          </tr>
+          <tr>
+            <th scope="row">Medium</th>
+            <td>${data.medium}</td>
+          </tr>
+          <tr>
+            <th scope="row">Salary</th>
+            <td>${data.salary}</td>
+          </tr>
+          <tr>
+            <th scope="row">Location</th>
+            <td>${data.location}</td>
+          </tr>
+          <tr>
+            <th scope="row">Prefered University</th>
+            <td>${data.prefered_university}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-grid gap-2 col-12 mx-auto">
+        <button class="btn btn-outline-success mb-2">Apply</button>
+    </div>
+
+</div>
   `;
     userListContainer.appendChild(cardElement);
   });
