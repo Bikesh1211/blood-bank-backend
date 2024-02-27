@@ -29,6 +29,7 @@ class FeedServices {
     try {
       return await this.NewsFeedModel.findAll();
     } catch (error) {
+      git;
       return error;
     }
   }

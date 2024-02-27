@@ -64,13 +64,12 @@ class UserService {
             ...user,
             token,
             success: true,
-            de,
           };
         } else {
           return { message: "invalid credentials", success: false };
         }
       } catch (error) {
-        return error;
+        return { success: false, error };
       }
     } catch (error) {
       throw error;

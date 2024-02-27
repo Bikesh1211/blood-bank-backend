@@ -17,12 +17,12 @@ function renderUsers(users) {
 
   users.forEach((data) => {
     const cardElement = document.createElement("div");
-    cardElement.classList.add("col-xl-6");
+    cardElement.classList.add("col-xl-7");
     cardElement.innerHTML = `
     <div class="col-sm-12 border rounded-4 p-5 mb-4">
     <div class="row text-center">
-        <div class="col-3 ">
-                <img src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg" class="img-fluid rounded" alt="Avatar">
+        <div class="col-4">
+        <img src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg" class="img-fluid rounded" alt="Avatar">
                 <h5 class="">Bikesh Chaudhary</h5>
         </div>
         <div class="col-6 text-start">

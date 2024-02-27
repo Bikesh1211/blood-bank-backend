@@ -22,9 +22,11 @@ function renderUsers(users) {
     cardElement.classList.add("col-4"); // Bootstrap column size
     cardElement.innerHTML = `
     <div class="border rounded-4 p-4 mb-4">
-    <img src="https://www.pluggedin.com/wp-content/uploads/2019/12/bad-teacher-1200x901.jpg" class="card-img-top" alt="User Image">
+    <div class="col-6 d-flex align-items-center gap-4">
+    <img src="https://www.looper.com/img/gallery/harry-potter-why-is-snape-so-mean-to-the-boy-who-lived/intro-1691673459.jpg" class="img-fluid rounded" alt="Avatar">
+    <h4 class="">${user.fullName}</h4>
+</div>
     <div class="card-body">
-        <h4 class="card-title">${user.fullName}</h4>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
 
         <table class="table table-borderless table-sm">
@@ -35,7 +37,7 @@ function renderUsers(users) {
         </tr>
         <tr >
         <th scope="row">Address</th>
-        <td>${user.Address}</td>
+        <td>${user.address}</td>
       </tr>
       <tr>
       <th scope="row">Contact</th>

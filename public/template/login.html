@@ -70,15 +70,13 @@
               if (!response.ok) {
                 throw new Error('Network response was not ok');
               }
-              console.log(response.status,'<----- status')
               return response.json(); 
             })
             .then(data => {
-              console.log('response->>>>>>',data)
-              if(data.success){
-                window.location.replace("users.html")
-                localStorage.setItem('userData',JSON.stringify(data))
-              }        
+              // window.location.replace("index.html")
+              const userData = JSON.stringify(data)
+              localStorage.setItem('userData',userData)
+      
             })
             .catch(error => {
               // Handle errors
