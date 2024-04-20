@@ -13,6 +13,7 @@ class FeedServices {
         { name: "medium", type: "VARCHAR(50)", notNull: true },
         { name: "salary", type: "VARCHAR(100)", notNull: true },
         { name: "location", type: "VARCHAR(100)", notNull: true },
+        { name: "phone", type: "VARCHAR(10)", notNull: true },
         { name: "prefered_university", type: "VARCHAR(50)", notNull: true },
         { name: "created_at", type: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" },
       ];
@@ -29,7 +30,6 @@ class FeedServices {
     try {
       return await this.NewsFeedModel.findAll();
     } catch (error) {
-      git;
       return error;
     }
   }

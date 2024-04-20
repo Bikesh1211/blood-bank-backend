@@ -57,6 +57,10 @@ function renderUsers(users) {
             <td>${data.location}</td>
           </tr>
           <tr>
+            <th scope="row">Phone Number</th>
+            <td>${data.phone}</td>
+          </tr>
+          <tr>
             <th scope="row">Prefered University</th>
             <td>${data.prefered_university}</td>
           </tr>

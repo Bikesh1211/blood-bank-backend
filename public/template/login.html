@@ -9,7 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <title>Login</title>
   <link rel="stylesheet" href="../css/login.css">
-
 </head>
 
 <body>
@@ -17,8 +16,8 @@
   <script src="../js/navbar.js"></script>
   <div class="container">
     <div class="row m-5">
-   
-      <div class=" col-xs-12 col-lg-6 col-xl-5  order-lg-2 order-sm-1 ">
+
+      <div class="col-xs-12 col-lg-6 col-xl-5 order-lg-2 order-sm-1">
         <form id="loginForm">
           <div class="mb-3">
             <h1>Login</h1>
@@ -32,21 +31,24 @@
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
-              <p class="mb-0">Don't Have an Account? <a href="register.html"> Register Now</a></p>
-              <button class="btn btn-primary ">Login</button>
-        </div>
+            <p class="mb-0">Don't Have an Account? <a href="register.html"> Register Now</a></p>
+            <button class="btn btn-primary">Login</button>
+          </div>
         </form>
       </div>
 
-      <div class=" col-xs-12 col-lg-6 col-xl-7 order-lg-1 order-sm-2 mt-5 mt-lg-0">
+      <div class="col-xs-12 col-lg-6 col-xl-7 order-lg-1 order-sm-2 mt-5 mt-lg-0">
         <div class="image-container">
           <img src="https://epe.brightspotcdn.com/6f/a8/c2f05ace44a9a09cc53392bbf41f/10-tutor-101221-1259958507.jpg"
             alt="">
         </div>
       </div>
+
+      <div class="col-12 mt-3">
+        <div id="alertContainer"></div>
+      </div>
+
       <script>
-
-
         document.getElementById('loginForm').addEventListener('submit', function (event) {
           event.preventDefault();
           const email = document.getElementById('email').value;
@@ -54,9 +56,11 @@
 
           // Data to be sent in the POST request
           const data = {
-            email, password
+            email,
+            password
           };
-                // Options for the fetch() function
+
+          // Options for the fetch() function
           const options = {
             method: 'POST',
             headers: {
@@ -70,20 +74,29 @@
               if (!response.ok) {
                 throw new Error('Network response was not ok');
               }
-              return response.json(); 
+              return response.json();
             })
             .then(data => {
-              window.location.replace("index.html")
-              const userData = JSON.stringify(data)
-              localStorage.setItem('userData',userData)
-      
+              // Display success message
+              const alertContainer = document.getElementById('alertContainer');
+              alertContainer.innerHTML = `
+                <div class="alert alert-success" role="alert">
+                  Login successful! Redirecting to homepage...
+                </div>
+              `;
+              // Redirect after a short delay
+              setTimeout(function () {
+                window.location.replace("index.html");
+                const userData = JSON.stringify(data);
+                localStorage.setItem('userData', userData);
+              },1000);
             })
             .catch(error => {
               // Handle errors
               console.error('There was a problem with the fetch operation:', error);
+              // Display error message if needed
             });
         });
- 
       </script>
     </div>
 

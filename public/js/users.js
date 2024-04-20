@@ -11,6 +11,7 @@ async function getUsers() {
 }
 
 function renderUsers(users) {
+  console.log("🚀 ~ renderUsers ~ users:", users);
   const userListContainer = document.getElementById("userList");
   userListContainer.innerHTML = ""; // Clear previous content
 

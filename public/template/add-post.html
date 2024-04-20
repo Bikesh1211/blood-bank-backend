@@ -41,6 +41,10 @@
             <input type="location" class="form-control form-control-sm" id="location" aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="phone" class="form-control form-control-sm" id="phone" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
             <label for="prefered_university" class="form-label">Prefered University</label>
             <input type="prefered_university" class="form-control form-control-sm" id="prefered_university" aria-describedby="emailHelp">
           </div>
@@ -68,11 +72,11 @@
           const salary = document.getElementById('salary').value;
           const prefered_university = document.getElementById('prefered_university').value;
           const location = document.getElementById('location').value;
+          const phone = document.getElementById('phone').value;
 
           const data = {
-           subject,medium,salary,prefered_university,class:standard,location
+           subject,medium,salary,prefered_university,class:standard,location,phone
           };
-          console.log('🚀 ~ data:', data)
           const options = {
             method: 'POST',
             headers: {
