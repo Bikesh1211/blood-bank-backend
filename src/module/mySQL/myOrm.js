@@ -12,7 +12,8 @@ const myOrm = (tableName) => {
         .then((record) => record)
         .catch((error) => error),
     dropTable: () => crudServices.dropTable(tableName),
-  createTable: (columns) => crudServices.createTable(tableName, columns),
+    createTable: (columns) => crudServices.createTable(tableName, columns),
+    find: (query) => crudServices.find(tableName, query),
   };
 };
 module.exports = myOrm;

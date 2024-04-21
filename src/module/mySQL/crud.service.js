@@ -171,6 +171,27 @@ class crudOperation {
       });
     } catch (error) {}
   };
+
+  find(tableName, query) {
+    return new Promise((resolve, reject) => {
+      let sql = `SELECT * FROM ${tableName}`;
+      let values = [];
+
+      if (query && Object.keys(query).length > 0) {
+        const conditions = Object.keys(query).map((key) => `${key} = ?`);
+        sql += ` WHERE ${conditions.join(" AND ")}`;
+        values = Object.values(query);
+      }
+
+      this.database.query(sql, values, (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
 }
 const crudServices = new crudOperation(database);
 module.exports = crudServices;

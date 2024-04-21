@@ -3,7 +3,12 @@ const PORT = 2003;
 const fs = require("fs");
 const paths = require("path");
 const userService = require("./src/services/user.service");
-const { getUsers, registerUser, loginUser } = require("./src/controller/users");
+const {
+  getUsers,
+  registerUser,
+  loginUser,
+  getTutor,
+} = require("./src/controller/users");
 const RouteHandler = require("./src/routes/users");
 const url = require("url");
 const qs = require("querystring");
@@ -105,6 +110,9 @@ const onRequest = async (req, res) => {
     } else if (method === "GET" && req.url === "/feeds") {
       res.writeHead(200, { "Content-Type": "application/json" });
       await getFeeds(req, res);
+    } else if (method === "GET" && req.url === "/tutor") {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      await getTutor(req, res);
     } else {
       res.writeHead(404);
       res.end(JSON.stringify({ error: "Not Found" }));

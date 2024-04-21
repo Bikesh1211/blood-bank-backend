@@ -60,6 +60,14 @@ const deleteUser = async (req, res) => {
     res.send({ message: "error", error });
   }
 };
+
+const getTutor = async (req, res) => {
+  try {
+    const data = await userService.findTutor();
+    res.end(JSON.stringify(data));
+  } catch (error) {}
+};
+
 module.exports = {
   getUsers,
   addUser,
@@ -67,4 +75,5 @@ module.exports = {
   deleteUser,
   loginUser,
   registerUser,
+  getTutor,
 };

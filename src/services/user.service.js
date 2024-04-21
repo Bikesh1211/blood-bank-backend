@@ -90,6 +90,15 @@ class UserService {
       throw error;
     }
   }
+  async findTutor() {
+    try {
+      const user = await this.UserModel.find({ role: "teacher" });
+      console.log("🚀 ~ UserService ~ findTutor ~ user:", user);
+      return user;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 const userService = new UserService(User);

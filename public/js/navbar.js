@@ -12,7 +12,6 @@ window.addEventListener("DOMContentLoaded", () => {
       const userNameLink = document.getElementById("userNameLink");
       const userName = JSON.parse(userData).data.fullName;
       const isSuccess = JSON.parse(userData)?.data?.success;
-      console.log("🚀 ~ .then ~ isSuccess:", isSuccess);
       document.getElementById("userNameLink").innerText = userName;
       logoutButton.addEventListener("click", () => {
         localStorage.clear();
