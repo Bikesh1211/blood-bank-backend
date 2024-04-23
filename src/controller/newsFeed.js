@@ -16,9 +16,9 @@ const addFeeds = async (req, res) => {
   console.log("🚀 ~ addFeed ~ body:", body);
   try {
     const user = await feedServices.addFeed(body);
-    res.end({ message: "success", user });
+    // res.end({ success: true, user });
   } catch (error) {
-    res.end({ error: "Error adding user", error });
+    res.end({ success: false, error: "Error adding user", error });
   }
 };
 
@@ -26,9 +26,9 @@ const addNewsFeed = async (req, res) => {
   try {
     const body = convertToJSON(req.body);
     const data = await feedServices.addFeed(body);
-    res.end(JSON.stringify({ data }));
+    res.end(JSON.stringify({ data, success: true }));
   } catch (error) {
-    res.end(JSON.stringify({ error: "Invalid JSON data" }));
+    res.end(JSON.stringify({ error: "Invalid JSON data", success: false }));
   }
 };
 
